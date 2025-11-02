@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+:root {
+  /* =========================================
+     Base Theme
+  ========================================= */
+  --background: #ffffff;
+
+  /* =========================================
+     Light Variants
+  ========================================= */
+  --blue-light: #e6fafc;
+  --green-light: #ebfff6;
+  --grey-light: #e6f1f5;
+  --neutral-light: #f3f3f3;
+
+  --blue-light-hover: #d9f8fa;
+  --green-light-hover: #e1fef2;
+  --grey-light-hover: #d9eaf0;
+  --neutral-light-hover: #ededed;
+
+  --blue-light-active: #b0f1f4;
+  --green-light-active: #c1fde3;
+  --grey-light-active: #b0d3e0;
+  --neutral-light-active: #dadada;
+
+  /* =========================================
+     Normal Variants
+  ========================================= */
+  --blue: #01d1dd;
+  --green: #36faa5;
+  --grey: #00709c;
+  --neutral: #878787;
+
+  --blue-hover: #01bcc7;
+  --green-hover: #31e195;
+  --grey-hover: #00658c;
+  --neutral-hover: #7a7a7a;
+
+  --blue-active: #01a7b1;
+  --green-active: #2bc884;
+  --grey-active: #005a7d;
+  --neutral-active: #6c6c6c;
+
+  /* =========================================
+     Dark Variants
+  ========================================= */
+  --blue-dark: #019da6;
+  --green-dark: #29bc7c;
+  --grey-dark: #005475;
+  --neutral-dark: #656565;
+
+  --blue-dark-hover: #017d85;
+  --green-dark-hover: #209663;
+  --grey-dark-hover: #00435e;
+  --neutral-dark-hover: #515151;
+
+  --blue-dark-active: #005e63;
+  --green-dark-active: #18704a;
+  --grey-dark-active: #003246;
+  --neutral-dark-active: #3d3d3d;
+
+  /* =========================================
+     Darker Variants
+  ========================================= */
+  --blue-darker: #00494d;
+  --green-darker: #13583a;
+  --grey-darker: #002737;
+  --neutral-darker: #2f2f2f;
+  font-family: var(--font-overused-grotesk), sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --font-grotesk: var(--font-overused-grotesk);
+}
+
+body {
+  background: var(--background);
+  font-family: var(--font-overused-grotesk), sans-serif;
+}
