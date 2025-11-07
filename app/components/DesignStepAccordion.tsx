@@ -1,8 +1,8 @@
 "use client";
 
 import { cn } from "@/utils/helper";
-import { motion, AnimatePresence } from "framer-motion";
-import { act, useState } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
+import { useRef, useState } from "react";
 
 const items = [
   {
@@ -39,71 +39,101 @@ const items = [
 
 export default function DesignAccordion() {
   const [active, setActive] = useState(1);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-20% 0px" });
 
   const toggle = (id: number) => {
     setActive(active === id ? -1 : id);
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.12 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 24 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
+  };
+
   return (
-    <section className="max-w-[1100px]  w-full pb-16 px-4 md:px-0">
-      <h2 className="text-[clamp(40px,8.5vw,64px)] font-medium max-w-[800px] leading-snug text-[#515151] mb-3">
+    <motion.section
+      ref={ref}
+      variants={containerVariants}
+      initial="hidden"
+      animate={isInView ? "show" : "hidden"}
+      className="max-w-[1100px] w-full pb-16 px-4 md:px-0"
+    >
+      <motion.h2
+        // @ts-expect-error
+        variants={itemVariants}
+        className="text-[clamp(16px,8.5vw,64px)] font-medium max-w-[800px] leading-snug text-[#515151] mb-3"
+      >
         Everything Design a Founder Needs,{" "}
         <span className="italic text-(--neutral)">From Idea to Launch.</span>
-      </h2>
+      </motion.h2>
 
-      <div className="flex flex-col ">
+      <div className="flex flex-col">
         {items.map((item) => (
-          <div
+          <motion.div
+            // @ts-expect-error
+            variants={itemVariants}
             key={item.id}
-            className={`py-6 cursor-pointer transition-colors relative duration-300 ${
-              active === item.id ? "bg-white" : "hover:bg-gray-50"
-            }`}
-            onClick={() => toggle(item.id)}
           >
             <div
-              className={cn(
-                "h-[7px] w-full bg-linear-to-r absolute top-0 left-0 right-0  to-transparent mb-10",
-                active === item.id ? "from-green-300" : "from-[#F3F3F3]"
-              )}
-            />
+              className={`py-6 cursor-pointer transition-colors relative duration-300 ${
+                active === item.id ? "bg-white" : "hover:bg-gray-50"
+              }`}
+              onClick={() => toggle(item.id)}
+            >
+              <div
+                className={cn(
+                  "h-[7px] w-full bg-linear-to-r absolute top-0 left-0 right-0  to-transparent mb-10",
+                  active === item.id ? "from-green-300" : "from-[#F3F3F3]"
+                )}
+              />
 
-            <div className="flex items-start gap-6">
-              <span
-                className={`text-3xl font-semibold ${
-                  active === item.id ? "text-gray-400" : "text-gray-200"
-                }`}
-              >
-                {String(item.id).padStart(2, "0")}
-              </span>
-
-              <div className="flex-1">
-                <p
-                  className={`text-lg font-medium ${
-                    active === item.id ? "text-gray-900" : "text-gray-500"
+              <div className="flex items-start gap-6">
+                <span
+                  className={`text-3xl font-semibold ${
+                    active === item.id ? "text-gray-400" : "text-gray-200"
                   }`}
                 >
-                  {item.title}
-                </p>
+                  {String(item.id).padStart(2, "0")}
+                </span>
 
-                <AnimatePresence>
-                  {active === item.id && (
-                    <motion.p
-                      key="content"
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="text-gray-500 text-sm mt-2 leading-relaxed"
-                    >
-                      {item.description}
-                    </motion.p>
-                  )}
-                </AnimatePresence>
+                <div className="flex-1">
+                  <p
+                    className={`text-lg font-medium ${
+                      active === item.id ? "text-gray-900" : "text-gray-500"
+                    }`}
+                  >
+                    {item.title}
+                  </p>
+
+                  <AnimatePresence>
+                    {active === item.id && (
+                      <motion.p
+                        key="content"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="text-gray-500 text-sm mt-2 leading-relaxed"
+                      >
+                        {item.description}
+                      </motion.p>
+                    )}
+                  </AnimatePresence>
+                </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
-    </section>
+    </motion.section>
   );
 }

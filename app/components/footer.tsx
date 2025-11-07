@@ -36,7 +36,7 @@ export default function Footer() {
           viewport={{ once: true }}
           className="w-full rounded-3xl sm:rounded-[60px] lg:rounded-[100px] px-6 sm:px-8 lg:px-12 py-8 sm:py-12 lg:py-16 flex flex-col md:flex-row items-center justify-between bg-linear-to-r from-[#DFFEF1] via-[#B0FFE6] to-[#C3E9FF] border border-[#00709C26] gap-6 md:gap-4"
         >
-          <div className="max-w-[830px] w-full flex justify-between mx-auto">
+          <div className="max-w-[830px] w-full flex justify-between mx-auto max-md:flex-col max-md:gap-6">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[48px] font-medium text-[#00709C] text-center md:text-left max-w-[520px] leading-tight">
               Let's work together
             </h2>

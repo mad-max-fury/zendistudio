@@ -1,7 +1,8 @@
 "use client";
 
 import { ProjectCard } from "@/components/projectCard/ProjectCard";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 const ProjectsOverview = () => {
   const projects = [
@@ -32,14 +33,12 @@ const ProjectsOverview = () => {
     },
   ];
 
-  // 🔹 Define animation variants
+  // variants
   const containerVariants = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.2, // delays each card
-      },
+      transition: { staggerChildren: 0.2 },
     },
   };
 
@@ -48,21 +47,26 @@ const ProjectsOverview = () => {
     show: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] },
+      transition: { duration: 0.55, ease: "easeOut" },
     },
   };
 
+  // in-view trigger
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-20% 0px" });
+
   return (
     <motion.div
+      ref={ref}
       variants={containerVariants}
       initial="hidden"
-      animate="show"
+      animate={isInView ? "show" : "hidden"}
       className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-[1100px] pt-[clamp(40px,10vw,76px)] px-4 md:px-0 pb-[clamp(60px,10vw,106px)]"
     >
       {projects.map((project) => (
         <motion.div
           key={project.id}
-          // @ts-expect-error: fix this ts error
+          // @ts-expect-error
           variants={cardVariants}
           className={project.featured ? "md:col-span-2" : ""}
         >
@@ -72,7 +76,6 @@ const ProjectsOverview = () => {
             subtitle={project.subtitle}
             year={project.year}
             aspects={project.featured ? "landscape" : "portrait"}
-            onClick={() => console.log(`${project.title} clicked`)}
           />
         </motion.div>
       ))}
