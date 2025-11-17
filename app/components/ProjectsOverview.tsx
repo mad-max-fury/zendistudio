@@ -31,6 +31,15 @@ const ProjectsOverview = () => {
       subtitle: "UX Audit · Data Visualization · SaaS",
       year: 2022,
     },
+    {
+      id: 4,
+      image:
+        "https://i.guim.co.uk/img/media/03a7df822cc59417396ab5061cd7eab659d6695d/1575_142_2234_1341/master/2234.jpg?width=1200&quality=85&auto=format&fit=max&s=5a19289d30fd15c358070c57bf277a16",
+      title: "Telehealth Platform UX Redesign",
+      subtitle: "Branding · Product Research · Product Redesign",
+      year: 2024,
+      featured: true,
+    },
   ];
 
   // variants

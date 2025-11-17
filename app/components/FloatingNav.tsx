@@ -9,7 +9,7 @@ import { TbMenu4 } from "react-icons/tb";
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Our Works", href: "/works" },
-  { label: "Blog", href: "/blog" },
+  { label: "Blogs", href: "/blogs" },
   { label: "Services", href: "/services" },
 ];
 
@@ -136,7 +136,7 @@ export default function FloatingNav() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
-          className="fixed top-28 left-1/2 -translate-x-1/2 z-[500] w-[calc(100%-2rem)] max-w-md md:hidden"
+          className="fixed top-28 left-1/2 -translate-x-1/2 z-500 w-[calc(100%-2rem)] max-w-md md:hidden"
         >
           <div className="bg-white/95 backdrop-blur-lg rounded-3xl shadow-xl border border-white/30 overflow-hidden p-6 flex flex-col gap-2">
             {navLinks.map((item) => (

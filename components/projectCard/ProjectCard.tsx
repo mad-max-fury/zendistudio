@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { cn } from "@/utils/helper";
+import { useRouter } from "next/navigation";
 
 interface ProjectCardProps {
   image: string;
@@ -25,11 +26,16 @@ export const ProjectCard = ({
   aspects = "landscape",
 }: ProjectCardProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const router = useRouter();
+
+  const handlClick = (id: string) => {
+    return router.push(`/works/${id}`);
+  };
 
   return (
     <motion.div
       transition={{ type: "spring", stiffness: 150 }}
-      onClick={onClick}
+      onClick={() => handlClick(title)}
       className={cn(
         "relative overflow-hidden  bg-white  cursor-pointer transition-all duration-300",
         className
